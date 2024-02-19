@@ -143,28 +143,28 @@ func init() {
 }
 
 func initConfig() {
-	// Don't forget to read config either from cfgFile or from home directory!
-	if cfgFile != "" {
-		// Use config file from the flag.
-		viper.SetConfigFile(cfgFile)
-	} else {
-		// the config will belocated under `~/.config/hydrophone.yaml` on linux
-		configDir := xdg.ConfigHome
-		viper.AddConfigPath(configDir)
-		viper.SetConfigType("yaml")
-		viper.SetConfigName("hydrophone")
+	// // Don't forget to read config either from cfgFile or from home directory!
+	// if cfgFile != "" {
+	// 	// Use config file from the flag.
+	// 	viper.SetConfigFile(cfgFile)
+	// } else {
+	// 	// the config will belocated under `~/.config/hydrophone.yaml` on linux
+	// 	configDir := xdg.ConfigHome
+	// 	viper.AddConfigPath(configDir)
+	// 	viper.SetConfigType("yaml")
+	// 	viper.SetConfigName("hydrophone")
 
-		if err := viper.ReadInConfig(); err != nil {
-			if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-				err := viper.SafeWriteConfig()
-				if err != nil {
-					log.Fatal("Error:", err)
-				}
-			} else {
-				log.Fatal(err)
-			}
-		}
-	}
+	// 	if err := viper.ReadInConfig(); err != nil {
+	// 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+	// 			err := viper.SafeWriteConfig()
+	// 			if err != nil {
+	// 				log.Fatal("Error:", err)
+	// 			}
+	// 		} else {
+	// 			log.Fatal(err)
+	// 		}
+	// 	}
+	// }
 	kubeconfig = service.GetKubeConfig(kubeconfig)
 	viper.Set("kubeconfig", kubeconfig)
 }
